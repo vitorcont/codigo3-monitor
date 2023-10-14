@@ -28,7 +28,7 @@ export const SocketProvider = (props: ISocketProvider) => {
 
 	const socketConnect = () => {
 		const controllerSocket = io(
-			`http://localhost:3011/codigo3/socket-services/controller`,
+			`${import.meta.env.VITE_SOCKET_API_URL}/controller`,
 			{
 				path: "/codigo3/socket-services",
 				transports: ["websocket"],
@@ -44,7 +44,6 @@ export const SocketProvider = (props: ISocketProvider) => {
 
 		navigationSocket.on("usersLocations", (data) => {
 			setUsersLive(data);
-			console.log("Aqui", data);
 		});
 		controllerSocket.on("activeControllers", (data) => {
 			setLiveControllers(data);
@@ -58,41 +57,30 @@ export const SocketProvider = (props: ISocketProvider) => {
 		setTimeout(() => {
 			navigationSocketState?.emit("getUsersLocations");
 			getUsersLocation();
-		}, 2000);
+		}, 1000);
 	};
 
 	useEffect(() => {
 		socketConnect();
 	}, []);
 
-	const teste = async () => {
-		const data = new NavigationSocket();
-		data.startTrip(
-			{
-				latitude: -22.879896,
-				longitude: -47.071031,
-			},
-			{
-				latitude: -22.867399,
-				longitude: -47.097235,
-			},
-		);
-		data.startEmitingLocation(10000);
-	};
-
 	useEffect(() => {
 		if (navigationSocketState) {
 			getUsersLocation();
-			teste();
+			// userTestClient();
 		}
 	}, [navigationSocketState]);
 
 	useEffect(() => {
 		if (controllerSocketState) {
 			controllerSocketState?.emit("getControllers");
-			new ControllerSocket("1");
-			new ControllerSocket("2");
-			new ControllerSocket("3");
+			new ControllerSocket("fatima1");
+			new ControllerSocket("fatima2");
+			new ControllerSocket("fatima3");
+			new ControllerSocket("fatima4");
+			new ControllerSocket("fatima5");
+			new ControllerSocket("saudade1");
+			new ControllerSocket("paulista1");
 		}
 	}, [controllerSocketState]);
 

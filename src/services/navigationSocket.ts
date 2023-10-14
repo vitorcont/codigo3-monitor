@@ -8,7 +8,7 @@ export class NavigationSocket {
 
 	constructor() {
 		this.socket = io(
-			`http://localhost:3011/codigo3/socket-services/navigation`,
+			`https://conti-server.com.br/codigo3/socket-services/navigation`,
 			{
 				path: "/codigo3/socket-services",
 				transports: ["websocket"],
@@ -16,7 +16,6 @@ export class NavigationSocket {
 		);
 		this.socket.emit("registerUser", { userId: 1 });
 		this.socket.on("tripPath", (route: any) => {
-			console.log("AAA", route);
 			this.enable = true;
 			this.pathIndex = 0;
 			this.path = route.routes[0].geometry.coordinates;
@@ -41,17 +40,13 @@ export class NavigationSocket {
 	}
 
 	startEmitingLocation(timespace: number) {
-		console.log("AAA", timespace);
-		console.log("NOT ENABLED", this.enable);
 		if (!this.enable) {
 			setTimeout(() => {
 				this.startEmitingLocation(timespace);
 			}, 2000);
 			return;
 		}
-		console.log("ENABLED", this.pathIndex, this.path.length);
 		if (this.pathIndex < this.path.length) {
-			console.log("EMIT");
 			this.socket.emit("updateLocation", {
 				latitude: this.path[this.pathIndex][1],
 				longitude: this.path[this.pathIndex][0],

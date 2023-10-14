@@ -5,7 +5,7 @@ export class ControllerSocket {
 
 	constructor(token: string) {
 		this.socket = io(
-			`http://localhost:3011/codigo3/socket-services/controller`,
+			`https://conti-server.com.br/codigo3/socket-services/controller`,
 			{
 				path: "/codigo3/socket-services",
 				transports: ["websocket"],

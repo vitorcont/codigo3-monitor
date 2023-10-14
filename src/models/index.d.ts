@@ -32,8 +32,15 @@ export type IControllerIndividual = {
 	latitude: number;
 	longitude: number;
 	interrupted: boolean;
+	bearingRequested: number;
 };
 
 export type IControllerMapper = {
 	[K in `${string}`]: IControllerIndividual | null;
 };
+
+export interface ControllerDB {
+	id: string;
+	latitude: number;
+	longitude: number;
+}
