@@ -39,3 +39,17 @@
 	border-style: solid;
 	overflow: hidden;
 }
+
+.sim-button {
+	min-width: 40%;
+	margin-top: 18px;
+}
+
+.sim-wrapper {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { io, Socket } from "socket.io-client";
 
 export class NavigationSocket {
@@ -7,14 +8,13 @@ export class NavigationSocket {
 	private path: number[][] = [];
 
 	constructor() {
-		this.socket = io(
-			`https://conti-server.com.br/codigo3/socket-services/navigation`,
-			{
-				path: "/codigo3/socket-services",
-				transports: ["websocket"],
-			},
-		);
-		this.socket.emit("registerUser", { userId: 1 });
+		this.socket = io(`${import.meta.env.VITE_SOCKET_API_URL}/navigation`, {
+			path: "/codigo3/socket-services",
+			transports: ["websocket"],
+		});
+		this.socket.emit("registerUser", {
+			userId: "5a1514d5-bfc4-46be-b11b-18e9a4652c4e",
+		});
 		this.socket.on("tripPath", (route: any) => {
 			this.enable = true;
 			this.pathIndex = 0;
@@ -55,6 +55,11 @@ export class NavigationSocket {
 			setTimeout(() => {
 				this.startEmitingLocation(timespace);
 			}, timespace);
+		} else {
+			this.socket.emit("endTrip", {});
+			setTimeout(() => {
+				this.closeConnection();
+			}, 5000);
 		}
 	}
 

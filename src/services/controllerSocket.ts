@@ -4,13 +4,10 @@ export class ControllerSocket {
 	private socket: Socket;
 
 	constructor(token: string) {
-		this.socket = io(
-			`https://conti-server.com.br/codigo3/socket-services/controller`,
-			{
-				path: "/codigo3/socket-services",
-				transports: ["websocket"],
-			},
-		);
+		this.socket = io(`${import.meta.env.VITE_SOCKET_API_URL}/controller`, {
+			path: "/codigo3/socket-services",
+			transports: ["websocket"],
+		});
 		this.socket.on("success", () => {
 			this.socket.emit("syncController", { token });
 		});

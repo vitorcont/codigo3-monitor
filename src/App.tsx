@@ -24,16 +24,46 @@ function App() {
 		"3": "#9E0606",
 	};
 
-	const clientAmFatPa = async () => {
+	const simButtons = [
+		{
+			title: "[Americana] NS.Fatima -> Saudade",
+			onClick: () => clientAmFatSdd(),
+		},
+		{
+			title: "[Americana] CB -> Av.Brasil",
+			onClick: () => clientAmCBBR(),
+		},
+		{
+			title: "[Campinas] SAMU -> EsPCEx",
+			onClick: () => clientCpsSAMUTiro(),
+		},
+	];
+
+	const clientCpsSAMUTiro = async () => {
 		const data = new NavigationSocket();
 		data.startTrip(
 			{
-				latitude: -22.747644,
-				longitude: -47.298809,
+				latitude: -22.918215,
+				longitude: -47.061095,
 			},
 			{
-				latitude: -22.731442,
-				longitude: -47.318446,
+				latitude: -22.88555,
+				longitude: -47.081732,
+			},
+		);
+		data.startEmitingLocation(500);
+	};
+
+	const clientAmCBBR = async () => {
+		const data = new NavigationSocket();
+		data.startTrip(
+			{
+				latitude: -22.738527,
+				longitude: -47.325911,
+			},
+			{
+				latitude: -22.746528,
+				longitude: -47.336757,
 			},
 		);
 		data.startEmitingLocation(1000);
@@ -186,21 +216,18 @@ function App() {
 					</Marker>
 				</Map>
 			</div>
-			<button
-				onClick={() => {
-					clientAmFatPa();
-				}}
-			>
-				Teste Americana NS.Fatima - Ardito
-			</button>
-			<button
-				onClick={() => {
-					clientAmFatSdd();
-				}}
-			>
-				Teste Americana NS.Fatima - Saudade
-			</button>
-			<p>'TEEE'</p>
+			<div className='sim-wrapper'>
+				{simButtons.map((sim) => (
+					<button
+						className='sim-button'
+						onClick={() => {
+							sim.onClick();
+						}}
+					>
+						{sim.title}
+					</button>
+				))}
+			</div>
 		</div>
 	);
 }
