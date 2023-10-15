@@ -90,6 +90,7 @@ export const SocketProvider = (props: ISocketProvider) => {
 				new ControllerSocket("avbrasil1");
 				new ControllerSocket("avbrasil2");
 			};
+
 			const CampinasControllers = () => {
 				new ControllerSocket("castelo1");
 				new ControllerSocket("castelo2");
