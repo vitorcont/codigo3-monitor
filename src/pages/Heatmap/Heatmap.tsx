@@ -15,19 +15,14 @@ function Heatmap() {
 			method: "GET",
 		});
 		const body: models.ITravel[] = await data.json();
-		const preFeature = body.map((travel, index) => {
+		const preFeature = body.map((travel) => {
 			const timeDiff = Math.ceil(dateDiff(travel.departedAt, travel.arrivedAt));
 
-			const array = [];
-			for (let i = 0; i < timeDiff; i++) {
-				array.push({
-					name: `Feature ${index + 1 + i}`,
-					longitude: travel.destinationLatitude,
-					latitude: travel.destinationLongitude,
-					value: 10,
-				});
-			}
-			return array;
+			return {
+				longitude: travel.destinationLatitude,
+				latitude: travel.destinationLongitude,
+				value: timeDiff,
+			};
 		});
 
 		console.log(preFeature);
@@ -43,13 +38,13 @@ function Heatmap() {
 				// Note: In a real application you would do a validation of JSON data before doing anything with it,
 				// but for demonstration purposes we ingore this part here and just trying to select needed data...
 				console.log(json);
-				setTravels(json);
+				// setTravels(json);
 			})
 			.catch((err) => console.error("Could not load data", err)); // eslint-disable-line
 	}, []);
 
 	useEffect(() => {
-		// fetchAllTravels();
+		fetchAllTravels();
 	}, []);
 
 	return (

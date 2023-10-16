@@ -1,6 +1,5 @@
 export const makeGeoJSON = (
 	data: {
-		name: string;
 		value: number;
 		latitude: number;
 		longitude: number;
@@ -12,7 +11,7 @@ export const makeGeoJSON = (
 			return {
 				type: "Feature",
 				properties: {
-					id: feature.name,
+					id: Math.ceil(Math.random() * 999999),
 					value: feature.value,
 				},
 				geometry: {
