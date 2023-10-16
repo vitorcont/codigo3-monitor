@@ -1,0 +1,55 @@
+.container {
+	width: 100vw;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	overflow-x: hidden !important;
+}
+
+.map-container {
+	height: 80vh;
+	width: 100vw;
+}
+
+.mapboxgl-ctrl-bottom-right,
+.mapboxgl-control-container {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.dot {
+	width: 20px;
+	height: 20px;
+	border-radius: 30px;
+	border-color: rgb(255, 255, 255);
+	border-width: 4px;
+	border-style: solid;
+	overflow: hidden;
+}
+
+.controller {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+	border-color: rgb(255, 255, 255);
+	border-width: 3px;
+	border-style: solid;
+	overflow: hidden;
+}
+
+.sim-button {
+	min-width: 40%;
+	margin-top: 18px;
+}
+
+.sim-wrapper {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+}

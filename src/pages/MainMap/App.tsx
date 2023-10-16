@@ -2,11 +2,11 @@
 import "./App.css";
 import Map, { Marker } from "react-map-gl";
 import { useContext, useEffect, useState } from "react";
-import TrafficIcon from "./assets/ic_traffic.svg";
-import DirectionsIcon from "./assets/ic_direction.svg";
+import TrafficIcon from "../../assets/ic_traffic.svg";
+import DirectionsIcon from "../../assets/ic_direction.svg";
+import { SocketContext } from "../../context/SocketContext";
+import { NavigationSocket } from "../../services/navigationSocket";
 
-import { SocketContext } from "./context/SocketContext";
-import { NavigationSocket } from "./services/navigationSocket";
 const token = import.meta.env.VITE_MAPBOX_KEY;
 
 function App() {
@@ -81,7 +81,7 @@ function App() {
 				longitude: -47.326557,
 			},
 		);
-		data.startEmitingLocation(1000);
+		data.startEmitingLocation(1500);
 	};
 
 	const fetchAllControllers = async () => {

@@ -44,3 +44,17 @@ export interface ControllerDB {
 	latitude: number;
 	longitude: number;
 }
+
+export interface ITravel {
+	id: string;
+	userId: string;
+	priority: number;
+	originLatitude: number;
+	originLongitude: number;
+	destinationLatitude: number;
+	destinationLongitude: number;
+	compressedRoute: null;
+	departedAt: string;
+	arrivedAt: string;
+	createdAt: string;
+}

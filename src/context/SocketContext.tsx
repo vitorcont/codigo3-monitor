@@ -118,7 +118,8 @@ export const SocketProvider = (props: ISocketProvider) => {
 				new ControllerSocket("gatti3");
 				new ControllerSocket("brasil1");
 			};
-			CampinasControllers();
+			// AmericanaControllers();
+			// CampinasControllers();
 		}
 	}, [controllerSocketState]);
 
