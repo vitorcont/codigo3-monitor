@@ -192,14 +192,28 @@ function App() {
 									latitude={controller!.latitude ?? 0}
 									anchor='bottom'
 								>
-									<div style={{ display: "flex", flexDirection: "row" }}>
+									<div
+										style={{
+											display: "flex",
+											flexDirection: "column",
+										}}
+									>
+										<p className='token'>{controller.token}</p>
 										<div
-											className='controller'
 											style={{
-												backgroundColor: "#595959",
+												display: "flex",
+												flexDirection: "row",
+												justifyContent: "center",
 											}}
 										>
-											<img src={TrafficIcon} width={18} height={18} />
+											<div
+												className='controller'
+												style={{
+													backgroundColor: "#595959",
+												}}
+											>
+												<img src={TrafficIcon} width={18} height={18} />
+											</div>
 										</div>
 									</div>
 								</Marker>

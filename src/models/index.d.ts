@@ -42,6 +42,7 @@ export type IControllerMapper = {
 export interface ControllerDB {
 	id: string;
 	latitude: number;
+	token: string;
 	longitude: number;
 }
 

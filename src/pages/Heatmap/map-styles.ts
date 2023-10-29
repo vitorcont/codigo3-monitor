@@ -54,7 +54,7 @@ export const heatmapLayer: HeatmapLayer = {
 			["linear"],
 			["zoom"],
 			0,
-			20,
+			40,
 			MAX_ZOOM_LEVEL,
 			10,
 		],

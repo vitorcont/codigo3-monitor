@@ -1,11 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { io, Socket } from "socket.io-client";
 
+interface Location {
+	latitude: number;
+	longitude: number;
+}
+
 export class NavigationSocket {
 	private socket: Socket;
 	private pathIndex: number = 0;
 	private enable = false;
 	private path: number[][] = [];
+	private destination: Location = {
+		latitude: 0,
+		longitude: 0,
+	};
+	private origin: Location = {
+		latitude: 0,
+		longitude: 0,
+	};
+	private startDate: Date = new Date();
 
 	constructor() {
 		this.socket = io(`${import.meta.env.VITE_SOCKET_API_URL}/navigation`, {
@@ -26,6 +40,9 @@ export class NavigationSocket {
 		start: { latitude: number; longitude: number },
 		end: { latitude: number; longitude: number },
 	) {
+		this.startDate = new Date();
+		this.destination = end;
+		this.origin = start;
 		await this.socket.emitWithAck("startTrip", {
 			origin: {
 				latitude: start.latitude,
@@ -48,8 +65,16 @@ export class NavigationSocket {
 		}
 		if (this.pathIndex < this.path.length) {
 			this.socket.emit("updateLocation", {
-				latitude: this.path[this.pathIndex][1],
-				longitude: this.path[this.pathIndex][0],
+				userId: "5a1514d5-bfc4-46be-b11b-18e9a4652c4e",
+				origin: this.origin,
+				destination: this.destination,
+				currentLocation: {
+					latitude: this.path[this.pathIndex][1],
+					longitude: this.path[this.pathIndex][0],
+				},
+				priority: 3,
+				startedAt: this.startDate,
+				geometry: this.path,
 			});
 			this.pathIndex = this.pathIndex + 1;
 			setTimeout(() => {

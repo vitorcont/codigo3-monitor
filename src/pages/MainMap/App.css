@@ -53,3 +53,9 @@
 	justify-content: space-around;
 	align-items: center;
 }
+
+.token {
+	color: #595959;
+	font-size: 14px;
+	margin: 0 0 5px 0;
+}

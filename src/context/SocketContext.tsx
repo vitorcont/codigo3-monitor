@@ -91,7 +91,7 @@ export const SocketProvider = (props: ISocketProvider) => {
 				new ControllerSocket("avbrasil2");
 			};
 
-			const CampinasControllers = () => {
+			const CampinasCasteloControllers = () => {
 				new ControllerSocket("castelo1");
 				new ControllerSocket("castelo2");
 				new ControllerSocket("castelo3");
@@ -117,9 +117,15 @@ export const SocketProvider = (props: ISocketProvider) => {
 				new ControllerSocket("gatti2");
 				new ControllerSocket("gatti3");
 				new ControllerSocket("brasil1");
+				new ControllerSocket("brasil2");
+			};
+			const CampinasRestControllers = () => {
+				new ControllerSocket("puc1");
+				new ControllerSocket("puc2");
 			};
 			// AmericanaControllers();
-			// CampinasControllers();
+			CampinasCasteloControllers();
+			CampinasRestControllers();
 		}
 	}, [controllerSocketState]);
 
