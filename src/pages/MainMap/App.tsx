@@ -37,6 +37,10 @@ function App() {
 			title: "[Campinas] SAMU -> EsPCEx",
 			onClick: () => clientCpsSAMUTiro(),
 		},
+		{
+			title: "[Custom]",
+			onClick: () => customClient(),
+		},
 	];
 
 	const clientCpsSAMUTiro = async () => {
@@ -81,7 +85,22 @@ function App() {
 				longitude: -47.326557,
 			},
 		);
-		data.startEmitingLocation(1500);
+		data.startEmitingLocation(500);
+	};
+
+	const customClient = async () => {
+		const data = new NavigationSocket();
+		data.startTrip(
+			{
+				latitude: -22.882041,
+				longitude: -47.065105,
+			},
+			{
+				latitude: -22.896409,
+				longitude: -47.080033,
+			},
+		);
+		data.startEmitingLocation(600);
 	};
 
 	const fetchAllControllers = async () => {
