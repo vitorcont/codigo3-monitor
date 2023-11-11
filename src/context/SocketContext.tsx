@@ -1,7 +1,9 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import io, { Socket } from "socket.io-client";
-import { ControllerSocket } from "../services/controllerSocket";
-import { NavigationSocket } from "../services/navigationSocket";
+import {
+	CampinasCasteloControllers,
+	CampinasRestControllers,
+} from "../services/allControllers";
 
 interface ISocketProvider {
 	children: React.ReactNode;
@@ -25,6 +27,7 @@ export const SocketProvider = (props: ISocketProvider) => {
 	const [usersLive, setUsersLive] = useState<models.IUserMapper | null>(null);
 	const [liveControllers, setLiveControllers] =
 		useState<models.IControllerMapper | null>(null);
+	const [ranSetup, setRanSetup] = useState(false);
 
 	const socketConnect = () => {
 		const controllerSocket = io(
@@ -46,6 +49,7 @@ export const SocketProvider = (props: ISocketProvider) => {
 			setUsersLive(data);
 		});
 		controllerSocket.on("activeControllers", (data) => {
+			console.log("ACTIVE", data);
 			setLiveControllers(data);
 		});
 
@@ -72,60 +76,17 @@ export const SocketProvider = (props: ISocketProvider) => {
 	}, [navigationSocketState]);
 
 	useEffect(() => {
-		if (controllerSocketState) {
-			controllerSocketState?.emit("getControllers");
-			const AmericanaControllers = () => {
-				new ControllerSocket("fatima1");
-				new ControllerSocket("fatima2");
-				new ControllerSocket("fatima3");
-				new ControllerSocket("fatima4");
-				new ControllerSocket("fatima5");
-				new ControllerSocket("saudade1");
-				new ControllerSocket("paulista1");
-				new ControllerSocket("paulista2");
-				new ControllerSocket("pernambuco1");
-				new ControllerSocket("rbranco1");
-				new ControllerSocket("rbranco2");
-				new ControllerSocket("avbrasiln1");
-				new ControllerSocket("avbrasil1");
-				new ControllerSocket("avbrasil2");
-			};
-
-			const CampinasCasteloControllers = () => {
-				new ControllerSocket("castelo1");
-				new ControllerSocket("castelo2");
-				new ControllerSocket("castelo3");
-				new ControllerSocket("castelo4");
-				new ControllerSocket("aneves1");
-				new ControllerSocket("aneves2");
-				new ControllerSocket("aneves3");
-				new ControllerSocket("aneves4");
-				new ControllerSocket("aneves5");
-				new ControllerSocket("aneves6");
-				new ControllerSocket("aneves7");
-				new ControllerSocket("aneves8");
-				new ControllerSocket("aneves9");
-				new ControllerSocket("aneves10");
-				new ControllerSocket("aneves11");
-				new ControllerSocket("bitapura1");
-				new ControllerSocket("csalles1");
-				new ControllerSocket("salles1");
-				new ControllerSocket("salles2");
-				new ControllerSocket("samu1");
-				new ControllerSocket("lix1");
-				new ControllerSocket("gatti1");
-				new ControllerSocket("gatti2");
-				new ControllerSocket("gatti3");
-				new ControllerSocket("brasil1");
-				new ControllerSocket("brasil2");
-			};
-			const CampinasRestControllers = () => {
-				new ControllerSocket("puc1");
-				new ControllerSocket("puc2");
-			};
-			// AmericanaControllers();
+		if (controllerSocketState && !ranSetup) {
+			console.log("Entrou");
+			setRanSetup(true);
 			CampinasCasteloControllers();
 			CampinasRestControllers();
+		}
+	}, [controllerSocketState]);
+
+	useEffect(() => {
+		if (controllerSocketState) {
+			controllerSocketState?.emit("getControllers");
 		}
 	}, [controllerSocketState]);
 
